@@ -46,6 +46,18 @@ def GetUserInput():
         print()
         return 'exit'
 
+def Parse(text):
+    match text:
+        case "new":
+            print("create new note")
+            return True
+        case "exit":
+            print("close program")
+            return False
+        case _:
+            print("Unrecognized")
+            return True
+
 def main():
     CheckArgs()
 
@@ -53,7 +65,5 @@ def main():
 
     while running:
         text = GetUserInput()
-        if text == 'exit':
-            running = False
-
+        running = Parse(text)
 main()
