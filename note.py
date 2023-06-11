@@ -38,6 +38,14 @@ def LoadObject(filename):
     except Exception as e:
         print(f"Error during unpickling object (Possibly unsupported): {e}")
 
+def GetUserInput():
+    try:
+        userIn = input("> ")
+        return userIn
+    except EOFError:
+        print()
+        return 'exit'
+
 def main():
     CheckArgs()
 
