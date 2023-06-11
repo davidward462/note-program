@@ -51,4 +51,9 @@ def main():
 
     running = True
 
+    while running:
+        text = GetUserInput()
+        if text == 'exit':
+            running = False
+
 main()
