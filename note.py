@@ -19,6 +19,15 @@ def SaveObject(obj):
     except Exception as e:
             print(f"Error occured during pickling object (possibly unsupported): {e}")
 
+# Load object from given pickle file
+def LoadObject(filename):
+    print("Loading...")
+    try:
+        with open(filename, "rb") as f:
+            return pickle.load(f)
+    except Exception as e:
+        print(f"Error during unpickling object (Possibly unsupported): {e}")
+
 def main():
     print()
 
