@@ -39,6 +39,8 @@ def LoadObject(filename):
         print(f"Error during unpickling object (Possibly unsupported): {e}")
 
 def main():
-    print()
+    CheckArgs()
+
+    running = True
 
 main()
