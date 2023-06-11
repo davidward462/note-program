@@ -10,6 +10,16 @@ class Note():
     def SetBody(data):
         self.body = data
 
+# Show filename and command line arguments.
+def CheckArgs():
+    print(f"Filename: {sys.argv[0]}")
+    argLen = len(sys.argv)
+    if argLen > 1:
+        for arg in sys.argv[1:]:
+            print(arg)
+    else:
+        print("No arguments passed.")
+
 # Save object to pickle file
 def SaveObject(obj):
     print("Saving...")
