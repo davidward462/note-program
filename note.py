@@ -1,10 +1,15 @@
 import sys
 import pickle # For saving and loading objects
 
+# Master object to store notes
 class NoteList():
     def __init__(self):
         self.count = 0
-
+        self.noteList = []
+    
+    def CreateNote():
+        print("Creating note...")
+    
 class Note():
     def __init__(self, name):
         # name is an instance variable
@@ -51,24 +56,6 @@ def GetUserInput():
         print()
         return 'exit'
 
-def NewNote():
-    print("Create new note")
-
-# Determine which command the user entered
-def Parse(text):
-    match text:
-        case "new":
-            NewNote()
-            return True
-        case "exit":
-            print("close program")
-            return False
-        case "":
-            return True # empty string
-        case _:
-            print("Unrecognized")
-            return True
-
 def main():
     CheckArgs()
 
@@ -79,6 +66,16 @@ def main():
     # main loop
     while running:
         text = GetUserInput()
-        running = Parse(text)
+
+        match text:
+            case "new":
+                NoteList().CreateNote()
+            case "exit":
+                print("close program")
+                running = False # Stop running
+            case "":
+                print(end='')
+            case _:
+                print("Unrecognized")
 
 main()
