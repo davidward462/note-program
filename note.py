@@ -7,8 +7,11 @@ class NoteList():
         self.count = 0
         self.noteList = []
     
-    def CreateNote():
+    def CreateNote(self):
         print("Creating note...")
+        n = Note("temp")
+        text = input()
+        n.body = text
     
 class Note():
     def __init__(self, name):
@@ -16,7 +19,7 @@ class Note():
         self.name = name
         self.body = ""
 
-    def SetBody(data):
+    def SetBody(self, data):
         self.body = data
 
 # Show filename and command line arguments.
@@ -67,15 +70,17 @@ def main():
     while running:
         text = GetUserInput()
 
+        # Determine which command was entered
         match text:
             case "new":
                 NoteList().CreateNote()
             case "exit":
-                print("close program")
                 running = False # Stop running
+            case "list":
+                print("Notes:")
             case "":
                 print(end='')
             case _:
-                print("Unrecognized")
+                print(f"Unrecognized command '{text}'")
 
 main()
