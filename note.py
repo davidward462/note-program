@@ -16,7 +16,8 @@ class NoteList():
     
     def CreateNote(self):
         print("Creating note...")
-        n = Note("myNote")
+        noteName = input()
+        n = Note(noteName)
         text = input()
         n.body = text
         self.noteList.append(n)
@@ -79,6 +80,9 @@ def GetUserInput():
         print()
         return 'exit'
 
+def ShowHelp():
+    print("\texit\n\tlist\n\tnum\n\tnew\n\tsave\n\tload")
+
 def main():
     CheckArgs()
 
@@ -92,11 +96,13 @@ def main():
 
         # Determine which command was entered
         match text:
+            case "help":
+                ShowHelp()
             case "new":
                 activeList.CreateNote()
             case "exit":
                 running = False # Stop running
-            case "number":
+            case "num":
                 activeList.PrintCount()
             case "list":
                 activeList.PrintList()
