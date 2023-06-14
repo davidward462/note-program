@@ -22,6 +22,10 @@ class NoteList():
         self.noteList.append(n)
         self.count = self.count + 1
 
+    def PrintList(self):
+        for note in self.noteList:
+            print(f"{note}")
+
     def __repr__(self):
         return f"Count: {self.count}\n"
         
@@ -95,7 +99,7 @@ def main():
             case "number":
                 activeList.PrintCount()
             case "list":
-                print("Notes:")
+                activeList.PrintList()
             case "save":
                 SaveObject(activeList)
             case "load":
