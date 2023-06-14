@@ -1,17 +1,30 @@
 import sys
 import pickle # For saving and loading objects
 
+# Global variables 
+pickelFile = "data.pickle"
+prompt = "> "
+
 # Master object to store notes
 class NoteList():
     def __init__(self):
         self.count = 0
         self.noteList = []
+
+    def PrintCount(self):
+        print(f"{self.count}")
     
     def CreateNote(self):
         print("Creating note...")
-        n = Note("temp")
+        n = Note("myNote")
         text = input()
         n.body = text
+        self.noteList.append(n)
+        self.count = self.count + 1
+
+    def __repr__(self):
+        return f"Count: {self.count}\n"
+        
     
 class Note():
     def __init__(self, name):
@@ -21,6 +34,9 @@ class Note():
 
     def SetBody(self, data):
         self.body = data
+
+    def __repr__(self):
+        return f"Name: {self.name}\nBody: {self.body}\n"
 
 # Show filename and command line arguments.
 def CheckArgs():
@@ -36,7 +52,7 @@ def CheckArgs():
 def SaveObject(obj):
     print("Saving...")
     try:
-        with open("data.pickle", "wb") as f:
+        with open(pickelFile, "wb") as f:
             pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
     except Exception as e:
             print(f"Error occured during pickling object (possibly unsupported): {e}")
@@ -53,7 +69,7 @@ def LoadObject(filename):
 # Handle user input and possible EOF
 def GetUserInput():
     try:
-        userIn = input("> ")
+        userIn = input(prompt)
         return userIn
     except EOFError:
         print()
@@ -64,7 +80,7 @@ def main():
 
     running = True
 
-    noteList = NoteList()
+    activeList = NoteList()
 
     # main loop
     while running:
@@ -73,11 +89,17 @@ def main():
         # Determine which command was entered
         match text:
             case "new":
-                NoteList().CreateNote()
+                activeList.CreateNote()
             case "exit":
                 running = False # Stop running
+            case "number":
+                activeList.PrintCount()
             case "list":
                 print("Notes:")
+            case "save":
+                SaveObject(activeList)
+            case "load":
+                activeList = LoadObject(pickelFile)
             case "":
                 print(end='')
             case _:
