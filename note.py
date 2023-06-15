@@ -13,15 +13,29 @@ class NoteList():
 
     def PrintCount(self):
         print(f"{self.count}")
-    
+
+    # Look for inputName in noteList list.
+    # return: true if name found, false otherwise.
+    def NameFound(self, inputName):
+        for note in self.noteList:
+            if note.name == inputName:
+                return True
+            else:
+                return False
+
+    def AddNote(self, note):
+        self.noteList.append(note)
+        self.count = self.count + 1
+
     def CreateNote(self):
         print("Creating note...")
         noteName = input()
+        if self.NameFound(noteName):
+            noteName = noteName + "-copy"
         n = Note(noteName)
         text = input()
         n.body = text
-        self.noteList.append(n)
-        self.count = self.count + 1
+        self.AddNote(n)
 
     def PrintList(self):
         for note in self.noteList:
