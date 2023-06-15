@@ -4,6 +4,7 @@ import pickle # For saving and loading objects
 # Global variables 
 pickelFile = "data.pickle"
 prompt = "> "
+space = " "
 
 # Master object to store notes
 class NoteList():
@@ -31,9 +32,13 @@ class NoteList():
         self.noteList.append(note)
         self.count = self.count + 1
 
-    def CreateNote(self):
+    def CreateNote(self, noteName):
         print("Creating note...")
-        noteName = input()
+
+        # if note name is empty, get the user input for the name.
+        if noteName == "":
+            noteName = input()
+
         if self.NameFound(noteName):
             noteName = noteName + "-copy"
         n = Note(noteName)
@@ -111,13 +116,22 @@ def main():
     # main loop
     while running:
         text = GetUserInput()
+        cmdArg = ""
+
+        splitText = text.split(space)
+        cmd = splitText[0]
+
+        # check if an argument was supplied to the command.
+        if len(splitText) > 1:
+            cmdArg = splitText[1]
+            print(f"arg: {cmdArg}")
 
         # Determine which command was entered
-        match text:
+        match cmd:
             case "help":
                 ShowHelp()
             case "new":
-                activeList.CreateNote()
+               activeList.CreateNote(cmdArg)
             case "exit":
                 running = False # Stop running
             case "num":
