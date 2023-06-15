@@ -14,6 +14,10 @@ class NoteList():
     def PrintCount(self):
         print(f"{self.count}")
 
+    def ClearList(self):
+        self.count = 0
+        self.noteList = []
+
     # Look for inputName in noteList list.
     # return: true if name found, false otherwise.
     def NameFound(self, inputName):
@@ -95,7 +99,7 @@ def GetUserInput():
         return 'exit'
 
 def ShowHelp():
-    print("\texit\n\tlist\n\tnum\n\tnew\n\tsave\n\tload")
+    print("\texit\n\tlist\n\tnum\n\tnew\n\tsave\n\tload\n\tclear")
 
 def main():
     CheckArgs()
@@ -122,8 +126,12 @@ def main():
                 activeList.PrintList()
             case "save":
                 SaveObject(activeList)
+                print("Complete.")
             case "load":
                 activeList = LoadObject(pickelFile)
+                print("Complete.")
+            case "clear":
+                activeList.ClearList()
             case "":
                 print(end='')
             case _:
