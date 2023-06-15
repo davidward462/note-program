@@ -22,15 +22,34 @@ class NoteList():
     # Look for inputName in noteList list.
     # return: true if name found, false otherwise.
     def NameFound(self, inputName):
+        isFound = False
         for note in self.noteList:
             if note.name == inputName:
-                return True
-            else:
-                return False
+                isFound = True
+        return isFound
+
+    def GetNoteIndex(self, noteName):
+        currentIndex = 0
+        for note in self.noteList:
+            if note.name == noteName:
+                return currentIndex
+            currentIndex = currentIndex + 1
 
     def AddNote(self, note):
         self.noteList.append(note)
         self.count = self.count + 1
+
+    def DeleteNote(self, inputName):
+        if self.NameFound(inputName):
+            index = self.GetNoteIndex(inputName)
+            print(f"deleting {inputName} at {index}...")
+
+    def FindNote(self, inputName):
+        if self.NameFound(inputName):
+            index = self.GetNoteIndex(inputName)
+            print(f"Note {inputName} has index {index}.")
+        else:
+            print(f"Note {inputName} note found.")
 
     def CreateNote(self, noteName):
         print("Creating note...")
@@ -112,7 +131,7 @@ def GetUserInput():
         return 'exit'
 
 def ShowHelp():
-    print("\texit\n\tlist\n\tnum\n\tnew\n\tsave\n\tload\n\tclear")
+    print("\texit\n\tlist\n\tnum\n\tnew\n\tsave\n\tload\n\tclear\n\tdelete\n\tfind")
 
 def main():
     CheckArgs()
@@ -157,6 +176,10 @@ def main():
                     activeList = tempNoteList
                     count = activeList.GetCount()
                     print(f"{count} notes loaded.")
+            case "delete":
+                activeList.DeleteNote(cmdArg)
+            case "find":
+                activeList.FindNote(cmdArg)
             case "clear":
                 activeList.ClearList()
             case "":
