@@ -46,9 +46,17 @@ class NoteList():
         n.body = text
         self.AddNote(n)
 
-    def PrintList(self):
+    def PrintList(self, number):
+        count = 0
+        if number == "":
+            number = self.count
+        else:
+            number = int(number)
+
         for note in self.noteList:
-            print(f"{note}")
+            if count < number:
+                print(f"{note}")
+            count = count + 1
 
     def __repr__(self):
         return f"Count: {self.count}\n"
@@ -124,7 +132,7 @@ def main():
         # check if an argument was supplied to the command.
         if len(splitText) > 1:
             cmdArg = splitText[1]
-            print(f"arg: {cmdArg}")
+            print(f"arg: {cmdArg}") # for testing purposes
 
         # Determine which command was entered
         match cmd:
@@ -137,7 +145,7 @@ def main():
             case "num":
                 activeList.PrintCount()
             case "list":
-                activeList.PrintList()
+                activeList.PrintList(cmdArg)
             case "save":
                 SaveObject(activeList)
                 print("Complete.")
