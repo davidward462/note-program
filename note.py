@@ -12,8 +12,8 @@ class NoteList():
         self.count = 0
         self.noteList = []
 
-    def PrintCount(self):
-        print(f"{self.count}")
+    def GetCount(self):
+        return self.count
 
     def ClearList(self):
         self.count = 0
@@ -143,15 +143,20 @@ def main():
             case "exit":
                 running = False # Stop running
             case "num":
-                activeList.PrintCount()
+                count = activeList.GetCount()
+                print(f"{count} notes in memory.")
             case "list":
                 activeList.PrintList(cmdArg)
             case "save":
                 SaveObject(activeList)
-                print("Complete.")
+                count = activeList.GetCount()
+                print(f"{count} notes saved.")
             case "load":
-                activeList = LoadObject(pickelFile)
-                print("Complete.")
+                tempNoteList = LoadObject(pickelFile)
+                if isinstance(tempNoteList, NoteList):
+                    activeList = tempNoteList
+                    count = activeList.GetCount()
+                    print(f"{count} notes loaded.")
             case "clear":
                 activeList.ClearList()
             case "":
