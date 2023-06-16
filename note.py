@@ -62,6 +62,8 @@ class NoteList():
         if self.NameFound(inputName):
             index = self.GetNoteIndex(inputName)
             print(f" deleting {inputName} at {index}...")
+            del self.noteList[index]
+            self.count = self.count - 1
 
     def FindNote(self, inputName):
         if self.NameFound(inputName):
