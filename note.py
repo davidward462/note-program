@@ -227,6 +227,6 @@ def main():
                 print(end='')
 
             case _:
-                print(f" Unrecognized command '{text}'")
+                print(f" Unrecognized command '{splitText[0]}'")
 
 main()
