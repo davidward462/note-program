@@ -16,14 +16,14 @@ class Commands():
         self.list = "list"
         self.load = "load"
         self.new = "new"
-        self.num = "num"
+        self.num = "count"
         self.save = "save"
 
         self.cmdList = [self.clear, self.delete, self.exit, self.find, self.help, self.list, self.load, self.new, self.num, self.save]
 
     def PrintCommands(self):
         for cmd in self.cmdList:
-            print(f"\t{cmd}")
+            print(f" {cmd}")
 
 # Master object to store notes
 class NoteList():
