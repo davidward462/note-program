@@ -61,14 +61,14 @@ class NoteList():
     def DeleteNote(self, inputName):
         if self.NameFound(inputName):
             index = self.GetNoteIndex(inputName)
-            print(f"deleting {inputName} at {index}...")
+            print(f" deleting {inputName} at {index}...")
 
     def FindNote(self, inputName):
         if self.NameFound(inputName):
             index = self.GetNoteIndex(inputName)
-            print(f"Note {inputName} has index {index}.")
+            print(f" Note {inputName} has index {index}.")
         else:
-            print(f"Note {inputName} note found.")
+            print(f" Note {inputName} note found.")
 
     def CreateNote(self, noteName):
         print(" Creating note...")
@@ -77,12 +77,26 @@ class NoteList():
         if noteName == "":
             noteName = input(space)
 
+        # if note name is taken, append text
         if self.NameFound(noteName):
             noteName = noteName + "-copy"
         n = Note(noteName)
         text = input(space)
         n.body = text
         self.AddNote(n)
+
+    def PrintNames(self, number):
+        count = 0
+        if number == "":
+            number = self.count
+        else:
+            number = int(number)
+
+        for note in self.noteList:
+            if count < number:
+                print(f" {note.name}", end=' ')
+            count = count + 1
+        print()
 
     def PrintList(self, number):
         count = 0
@@ -114,7 +128,6 @@ class Note():
 
 # Show filename and command line arguments.
 def CheckArgs():
-    print(f" Filename: {sys.argv[0]}")
     argLen = len(sys.argv)
     if argLen > 1:
         for arg in sys.argv[1:]:
@@ -187,7 +200,7 @@ def main():
                 print(f" {count} notes in memory.")
                 
             case cmds.list:
-                activeList.PrintList(cmdArg)
+                activeList.PrintNames(cmdArg)
 
             case cmds.save:
                 SaveObject(activeList)
