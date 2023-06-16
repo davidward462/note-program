@@ -6,6 +6,25 @@ pickelFile = "data.pickle"
 prompt = "> "
 space = " "
 
+class Commands():
+    def __init__(self):
+        self.clear = "clear"
+        self.delete = "delete"
+        self.exit= "exit"
+        self.find = "find"
+        self.help = "help"
+        self.list = "list"
+        self.load = "load"
+        self.new = "new"
+        self.num = "num"
+        self.save = "save"
+
+        self.cmdList = [self.clear, self.delete, self.exit, self.find, self.help, self.list, self.load, self.new, self.num, self.save]
+
+    def PrintCommands(self):
+        for cmd in self.cmdList:
+            print(f"\t{cmd}")
+
 # Master object to store notes
 class NoteList():
     def __init__(self):
@@ -130,15 +149,14 @@ def GetUserInput():
         print()
         return 'exit'
 
-def ShowHelp():
-    print("\texit\n\tlist\n\tnum\n\tnew\n\tsave\n\tload\n\tclear\n\tdelete\n\tfind")
-
 def main():
     CheckArgs()
 
     running = True
 
+    # Create objects
     activeList = NoteList()
+    cmds = Commands()
 
     # main loop
     while running:
@@ -156,7 +174,7 @@ def main():
         # Determine which command was entered
         match cmd:
             case "help":
-                ShowHelp()
+                cmds.PrintCommands()
             case "new":
                activeList.CreateNote(cmdArg)
             case "exit":
