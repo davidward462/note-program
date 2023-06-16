@@ -173,35 +173,46 @@ def main():
 
         # Determine which command was entered
         match cmd:
-            case "help":
+            case cmds.help:
                 cmds.PrintCommands()
-            case "new":
+
+            case cmds.new:
                activeList.CreateNote(cmdArg)
-            case "exit":
+               
+            case cmds.exit:
                 running = False # Stop running
-            case "num":
+
+            case cmds.num:
                 count = activeList.GetCount()
                 print(f"{count} notes in memory.")
-            case "list":
+                
+            case cmds.list:
                 activeList.PrintList(cmdArg)
-            case "save":
+
+            case cmds.save:
                 SaveObject(activeList)
                 count = activeList.GetCount()
                 print(f"{count} notes saved.")
-            case "load":
+
+            case cmds.load:
                 tempNoteList = LoadObject(pickelFile)
                 if isinstance(tempNoteList, NoteList):
                     activeList = tempNoteList
                     count = activeList.GetCount()
                     print(f"{count} notes loaded.")
-            case "delete":
+
+            case cmds.delete:
                 activeList.DeleteNote(cmdArg)
-            case "find":
+
+            case cmds.find:
                 activeList.FindNote(cmdArg)
-            case "clear":
+
+            case cmds.clear:
                 activeList.ClearList()
+
             case "":
                 print(end='')
+
             case _:
                 print(f"Unrecognized command '{text}'")
 
