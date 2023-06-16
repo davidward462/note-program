@@ -71,16 +71,16 @@ class NoteList():
             print(f"Note {inputName} note found.")
 
     def CreateNote(self, noteName):
-        print("Creating note...")
+        print(" Creating note...")
 
         # if note name is empty, get the user input for the name.
         if noteName == "":
-            noteName = input()
+            noteName = input(space)
 
         if self.NameFound(noteName):
             noteName = noteName + "-copy"
         n = Note(noteName)
-        text = input()
+        text = input(space)
         n.body = text
         self.AddNote(n)
 
@@ -97,7 +97,7 @@ class NoteList():
             count = count + 1
 
     def __repr__(self):
-        return f"Count: {self.count}\n"
+        return f" Count: {self.count}\n"
         
     
 class Note():
@@ -110,35 +110,35 @@ class Note():
         self.body = data
 
     def __repr__(self):
-        return f"Name: {self.name}\nBody: {self.body}\n"
+        return f" Name: {self.name}\n Body: {self.body}\n"
 
 # Show filename and command line arguments.
 def CheckArgs():
-    print(f"Filename: {sys.argv[0]}")
+    print(f" Filename: {sys.argv[0]}")
     argLen = len(sys.argv)
     if argLen > 1:
         for arg in sys.argv[1:]:
             print(arg)
     else:
-        print("No arguments passed.")
+        print(" No arguments passed.")
 
 # Save object to pickle file
 def SaveObject(obj):
-    print("Saving...")
+    print(" Saving...")
     try:
         with open(pickelFile, "wb") as f:
             pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
     except Exception as e:
-            print(f"Error occured during pickling object (possibly unsupported): {e}")
+            print(f" Error occured during pickling object (possibly unsupported): {e}")
 
 # Load object from given pickle file
 def LoadObject(filename):
-    print("Loading...")
+    print(" Loading...")
     try:
         with open(filename, "rb") as f:
             return pickle.load(f)
     except Exception as e:
-        print(f"Error during unpickling object (Possibly unsupported): {e}")
+        print(f" Error during unpickling object (Possibly unsupported): {e}")
 
 # Handle user input and possible EOF
 def GetUserInput():
@@ -169,7 +169,7 @@ def main():
         # check if an argument was supplied to the command.
         if len(splitText) > 1:
             cmdArg = splitText[1]
-            print(f"arg: {cmdArg}") # for testing purposes
+            print(f" arg: {cmdArg}") # for testing purposes
 
         # Determine which command was entered
         match cmd:
@@ -184,7 +184,7 @@ def main():
 
             case cmds.num:
                 count = activeList.GetCount()
-                print(f"{count} notes in memory.")
+                print(f" {count} notes in memory.")
                 
             case cmds.list:
                 activeList.PrintList(cmdArg)
@@ -192,14 +192,14 @@ def main():
             case cmds.save:
                 SaveObject(activeList)
                 count = activeList.GetCount()
-                print(f"{count} notes saved.")
+                print(f" {count} notes saved.")
 
             case cmds.load:
                 tempNoteList = LoadObject(pickelFile)
                 if isinstance(tempNoteList, NoteList):
                     activeList = tempNoteList
                     count = activeList.GetCount()
-                    print(f"{count} notes loaded.")
+                    print(f" {count} notes loaded.")
 
             case cmds.delete:
                 activeList.DeleteNote(cmdArg)
@@ -214,6 +214,6 @@ def main():
                 print(end='')
 
             case _:
-                print(f"Unrecognized command '{text}'")
+                print(f" Unrecognized command '{text}'")
 
 main()
