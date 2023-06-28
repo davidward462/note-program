@@ -50,13 +50,13 @@ class NoteList():
 
         # if note name is empty, get the user input for the name.
         if noteName == "":
-            noteName = input(space)
+            noteName = input("")
 
         # if note name is taken, append text
         if self.NameFound(noteName):
             noteName = noteName + "-copy"
         n = Note(noteName)
-        text = input(space)
+        text = input("")
         n.body = text
         self.AddNote(n)
 
