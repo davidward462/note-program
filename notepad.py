@@ -5,7 +5,6 @@ import noteList
 # Global variables 
 pickelFile = "data.pickle"
 prompt = "> "
-space = " "
 
 class Commands():
     def __init__(self):
