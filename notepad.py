@@ -1,6 +1,7 @@
 import sys
 import pickle # For saving and loading objects
 import noteList
+import note
 
 # Global variables 
 pickelFile = "data.pickle"
@@ -25,8 +26,6 @@ class Commands():
         for cmd in self.cmdList:
             print(f" {cmd}")
 
-        
-    
 class Note():
     def __init__(self, name):
         # name is an instance variable
@@ -92,7 +91,7 @@ def main():
         text = GetUserInput()
         cmdArg = ""
 
-        splitText = text.split(space)
+        splitText = text.split(" ")
         cmd = splitText[0]
 
         # check if an argument was supplied to the command.
@@ -125,7 +124,7 @@ def main():
 
             case cmds.load:
                 tempNoteList = LoadObject(pickelFile)
-                if isinstance(tempNoteList, NoteList):
+                if isinstance(tempNoteList, noteList.NoteList):
                     activeList = tempNoteList
                     count = activeList.GetCount()
                     print(f" {count} notes loaded.")

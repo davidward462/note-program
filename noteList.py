@@ -1,3 +1,5 @@
+import note
+
 # Master object to store notes
 class NoteList():
     def __init__(self):
@@ -55,7 +57,7 @@ class NoteList():
         # if note name is taken, append text
         if self.NameFound(noteName):
             noteName = noteName + "-copy"
-        n = Note(noteName)
+        n = note.Note(noteName)
         text = input("")
         n.body = text
         self.AddNote(n)
