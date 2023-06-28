@@ -128,6 +128,9 @@ class Note():
     def __repr__(self):
         return f" Name: {self.name}\n Body: {self.body}\n"
 
+def default():
+    return "default"
+
 # Show filename and command line arguments.
 def CheckArgs():
     argLen = len(sys.argv)
@@ -175,7 +178,8 @@ def main():
 
     # main loop
     while running:
-        text = GetUserInput()
+       # text = GetUserInput()
+        text = ""
         cmdArg = ""
 
         splitText = text.split(space)
